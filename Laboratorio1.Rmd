@@ -1,0 +1,112 @@
+---
+title: "Laboratorio"
+output: html_notebook
+---
+
+Eduardo Canel
+
+Laboratorio 1
+cargar datos
+creacion de vector
+```{r}
+student_1 <- c(50.4, 62.3, 92.1, 77.6, TRUE ) 
+student_2 <- c(41.7, 87.9, 75.3, 72.4, FALSE )
+student_3 <- c(30.3, 67.8, 69.3, 71.2, FALSE )
+student_4 <- c(65.4, 85.1, 92.3, 96.8, TRUE )
+student_5 <- c(70.4, 88.2, 95.2, 90.7, TRUE )
+
+
+
+```
+vectores y matrices parte 1
+creacion de vector de vectores
+```{r}
+
+students_vector<- c(student_1,student_2,student_3,student_4,student_5) 
+
+
+```
+construir la matriz
+```{r}
+
+students_matrix <-matrix(students_vector,nrow=5,byrow = TRUE)
+
+```
+ parte 2 nombrado de una matriz
+
+```{r}
+
+name_students <- c("Lily Brown", "Davis Moore", "Susan Taylor", "Mike Jones",
+"Tom Hill")
+name_courses_legal_age <- c("TIC", "Accounting", "Psychology", "Ethics",
+"Legal_age" )
+
+students_matrix
+
+colnames(students_matrix) <- name_courses_legal_age
+rownames(students_matrix)<-name_students
+
+students_matrix
+
+
+```
+
+Parte 3 rownum y cbynd
+
+```{r}
+students_matrix
+
+total_grade_student<- rowSums(students_matrix[,c(1,2,3,4)])
+
+total_grade_student
+
+result_students <- cbind(students_matrix,total_grade_student)
+result_students
+
+```
+Seccion 4 elementos de una matriz
+```{r}
+
+selected_elements<-result_students[c(1,3,5),c(2,4)]
+selected_elements
+
+```
+
+5 data frame
+```{r}
+
+students_grades_df <-data.frame(result_students)
+students_grades_df
+
+subset(students_grades_df,subset  = Accounting>80 & Legal_age==TRUE)
+
+```
+6 funciones condiciones y bucles
+
+```{r}
+
+result_students
+
+students_projection <- function(views){
+ for(row in 1:nrow(views)){
+  for(col in 1:(ncol(views)-2)){
+    print(paste("on row",row,"and column",col,"contaings",views[row,col]))
+    if(views[row,col]<=45)
+    {print("Student at risk")
+    
+   }else{
+    if(views[row,col]>45 & views[row,col]<61)
+    {
+      print("Student may be approved")
+   }else{
+    print("Student approved")
+  }
+  }
+  }
+}
+}
+resutlt<- students_projection(result_students)
+resutlt
+
+```
+
